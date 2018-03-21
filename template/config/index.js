@@ -3,9 +3,22 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const merge = require('webpack-merge')
+
+const devExternals = {
+  // lodash: '_',
+  // axios: 'axios',
+  // 'iview/dist/styles/iview.css': 'void(0)',
+}
+
+const buildExternals = merge({
+  // vue: 'Vue',
+  // iview: 'iview',
+}, devExternals)
 
 module.exports = {
   dev: {
+    externals: devExternals,
 
     // Paths
     assetsSubDirectory: 'static',
@@ -45,6 +58,8 @@ module.exports = {
   },
 
   build: {
+    externals: buildExternals,
+
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 
