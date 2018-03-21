@@ -13,6 +13,8 @@ const templateVersion = pkg.version
 
 const { addTestAnswers } = require('./scenarios')
 
+const extra = require('./meta-extra')
+
 module.exports = {
   metalsmith: {
     // When running tests for the template, this adds answers for the selected scenario
@@ -31,8 +33,8 @@ module.exports = {
       return templateVersion
     },
   },
-  
-  prompts: {
+
+  prompts: Object.assign({}, {
     name: {
       when: 'isNotTest',
       type: 'string',
@@ -55,6 +57,7 @@ module.exports = {
       when: 'isNotTest',
       type: 'list',
       message: 'Vue build',
+      default: 'runtime',
       choices: [
         {
           name: 'Runtime + Compiler: recommended for most users',
@@ -78,6 +81,7 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: 'Use ESLint to lint your code?',
+      default: false,
     },
     lintConfig: {
       when: 'isNotTest && lint',
@@ -105,6 +109,7 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: 'Set up unit tests',
+      default: false,
     },
     runner: {
       when: 'isNotTest && unit',
@@ -132,12 +137,14 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: 'Setup e2e tests with Nightwatch?',
+      default: false,
     },
     autoInstall: {
       when: 'isNotTest',
       type: 'list',
       message:
         'Should we run `npm install` for you after the project has been created? (recommended)',
+      default: false,
       choices: [
         {
           name: 'Yes, use NPM',
@@ -156,8 +163,8 @@ module.exports = {
         },
       ],
     },
-  },
-  filters: {
+  }, extra.prompts),
+  filters: Object.assign({}, {
     '.eslintrc.js': 'lint',
     '.eslintignore': 'lint',
     'config/test.env.js': 'unit || e2e',
@@ -170,7 +177,7 @@ module.exports = {
     'test/unit/setup.js': "unit && runner === 'jest'",
     'test/e2e/**/*': 'e2e',
     'src/router/**/*': 'router',
-  },
+  }, extra.filters),
   complete: function(data, { chalk }) {
     const green = chalk.green
 

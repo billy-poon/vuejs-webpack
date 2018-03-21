@@ -80,6 +80,43 @@
         </a>
       </li>
     </ul>
+    <h2>3rd Libraries</h2>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/axios/axios"
+          target="_blank"
+        >
+          axios
+        </a>
+      </li>
+      <li>
+        <a
+          {{#if_eq uiLibrary "iview"}}
+          class="ivu-btn"
+          {{/if_eq}}
+          href="https://iviewui.com/"
+          target="_blank"
+        >
+          {{#if_eq uiLibrary "iview"}}
+          <Icon type="social-github" />
+          {{/if_eq}}
+          iView
+        </a>
+      </li>
+      <li>
+        {{#if_eq uiLibrary "muse-ui"}}
+        <mu-raised-button label="Muse UI" href="https://museui.github.io/" target="_blank"/>
+        {{else}}
+        <a
+          href="https://museui.github.io/"
+          target="_blank"
+        >
+          Muse UI
+        </a>
+        {{/if_eq}}
+      </li>
+    </ul>
   </div>
 </template>
 

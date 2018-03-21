@@ -25,10 +25,25 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    {{#if_eq uiLibrary "iview"}}
+    "iview": "^2.11.0",
+    {{/if_eq}}
+    {{#if_eq uiLibrary "muse-ui"}}
+    "muse-ui": "^2.1.0",
+    {{/if_eq}}
+
     "vue": "^2.5.2"{{#router}},
     "vue-router": "^3.0.1"{{/router}}
   },
   "devDependencies": {
+    {{#less}}
+    "less": "^3.0.1",
+    "less-loader": "^4.1.0",
+    {{/less}}
+    {{#axios}}
+    "axios": "^0.18.0",
+    {{/axios}}
+
     {{#lint}}
     "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
