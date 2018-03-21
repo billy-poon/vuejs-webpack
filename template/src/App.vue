@@ -15,10 +15,16 @@ import HelloWorld from './components/HelloWorld'
 
 {{/unless}}
 export default {
-  name: 'App'{{#router}}{{else}},
+  name: 'App',
+  {{#router}}
+  {{else}}
   components: {
     HelloWorld
-  }{{/router}}
+  },
+  {{/router}}
+  created() {
+    window.$app = this
+  }
 }
 </script>
 
